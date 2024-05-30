@@ -330,7 +330,7 @@ http://localhost/
 https://localhost/
 ```
 
-<img src="/images/com_seguranca.png"> <br>
+<img src="/images/seguranca.png"> <br>
 
 ```
 http://localhost/servico1/
@@ -342,7 +342,7 @@ http://localhost/servico1/
 https://localhost/servico1/
 ```
 
-<img src="/images/com_seguranca1.png"> <br>
+<img src="/images/seguranca1.png"> <br>
 
 ```
 http://localhost/servico2/
@@ -354,4 +354,4 @@ http://localhost/servico2/
 https://localhost/servico2/
 ```
 
-<img src="/images/com_seguranca2.png"> <br>
+<img src="/images/seguranca2.png"> <br>
