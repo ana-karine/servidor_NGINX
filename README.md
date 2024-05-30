@@ -45,7 +45,7 @@ http://localhost:8080/
 
 **b. Configurar um Servidor Web Básico:**
 
-- Criar o arquivo de configuração padrão para o novo servidor:
+- Criar o arquivo de configuração para o novo servidor:
 
 ```
 sudo nano /etc/nginx/sites-enabled/default.conf
@@ -66,7 +66,7 @@ server {
 }
 ```
 
-- Verificar se há erros de sintaxe na configuração do servidor:
+- Verificar se há erros de sintaxe na configuração do servidor: 
 
 ```
 sudo nginx -t
@@ -95,3 +95,48 @@ http://localhost/
 
 <img src="/images/novo_servidor.png"> <br>
 
+#### 2. Proxy Reverso
+
+**Objetivo:** configurar regras de proxy reverso para direcionar o tráfego para diferentes serviços ou aplicativos.
+
+#### Passos:
+
+**a. Configurar um proxy reverso da porta 8080 para a porta 80:**
+
+- Entrar no arquivo de configuração padrão do Nginx:
+
+```
+sudo nano /etc/nginx/sites-enabled/default
+```
+
+- Adicionar a configuração de proxy reverso::
+
+```
+server {
+        listen 8080 default_server;
+        listen [::]:8080 default_server;
+
+        root /var/www/html;
+        index index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                proxy_pass http://localhost:80; # Proxy reverso para o servidor na porta 80
+        }
+}
+```
+
+- Verificar se há erros de sintaxe e recarregar o servidor:
+
+```
+sudo nginx -t
+sudo nginx -s reload
+```
+
+- Testar o novo servidor rodando na porta 8080:
+
+```
+http://localhost:8080/
+
+<img src="/images/proxy.png"> <br>
