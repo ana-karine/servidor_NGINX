@@ -4,6 +4,8 @@
 
 Configurar e otimizar um servidor NGINX para atuar como servidor web, proxy reverso e gateway de API. O projeto visa otimizar o desempenho, implementar HTTPS, configurar regras de proxy reverso e gerenciar servidores web seguros.
 
+**Nota:** os arquivos utilizados no front-end do projeto encontram-se na pasta [www](https://github.com/ana-karine/servidor_NGINX/tree/main/www)
+
 ### Etapas do Projeto
 
 #### 1. Configuração Básica
@@ -356,7 +358,7 @@ https://localhost/servico2/
 
 <img src="/images/seguranca2.png"> <br>
 
-#### Otimização de Desempenho
+#### 5. Otimização de Desempenho
 
 **Objetivo:** implementar cache HTTP e compressão Gzip.
 
