@@ -324,7 +324,7 @@ sudo nginx -s reload
 http://localhost/
 ```
 
-<img src="/images/seguranca.png"> <br>
+<img src="/images/sem_seguranca.png"> <br>
 
 ```
 https://localhost/
@@ -336,7 +336,7 @@ https://localhost/
 http://localhost/servico1/
 ```
 
-<img src="/images/seguranca1.png"> <br>
+<img src="/images/sem_seguranca1.png"> <br>
 
 ```
 https://localhost/servico1/
@@ -348,7 +348,7 @@ https://localhost/servico1/
 http://localhost/servico2/
 ```
 
-<img src="/images/seguranca2.png"> <br>
+<img src="/images/sem_seguranca2.png"> <br>
 
 ```
 https://localhost/servico2/
