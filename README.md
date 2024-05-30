@@ -29,7 +29,7 @@ sudo systemctl status nginx
 
 **c. Inicializar o Nginx:**
 
-Executar esse passo, caso o status atual do serviço seja `inactive (dead)`.
+Executar esse passo caso o status atual do serviço seja `inactive (dead)`.
 
 ```
 sudo systemctl start nginx
