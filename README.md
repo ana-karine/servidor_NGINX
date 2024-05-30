@@ -254,3 +254,104 @@ http://localhost:8080/servico2
 
 <img src="/images/servico2.png"> <br>
 
+#### 4. Segurança e HTTPS
+
+**Objetivo:** implementar HTTPS com certificado SSL e configurar políticas de segurança.
+
+#### Passos:
+
+**a. Obter um certificado SSL:**
+
+- Gerar um certificado SSL autoassinado usando o OpenSSL:
+
+```
+openssl req -x509 -nodes -days 30 -newkey rsa:2048 -keyout /tmp/localhost.key -out /tmp/localhost.crt
+```
+
+- Adicionar um certificado ao banco de dados NSS usando o certutil:
+
+```
+certutil -A -d sql:$HOME/.pki/nssdb -t "C,," -n "localhost" -i /tmp/localhost.crt
+```
+
+**b. Configurar as políticas de segurança:**
+
+- Abrir o arquivo `default.conf` para adicionar políticas de segurança:
+
+```
+sudo nano default.conf
+```
+
+- Configurar o servidor para escutar na porta 443 (HTTPS) com SSL ativado:
+
+```
+server {
+    listen 443 ssl;
+
+    server_name localhost; # Nome do servidor
+
+    ssl_certificate /tmp/localhost.crt;
+    ssl_certificate_key /tmp/localhost.key;     
+
+    location / {
+        root /var/www/my_server_nginx; # Diretório raiz do servidor
+        index index.html; # Arquivo padrão de índice
+    }
+}
+
+server {
+    listen 80; # Porta em que o servidor irá escutar
+
+    server_name localhost; # Nome do servidor
+
+    location / {
+        root /var/www/my_server_nginx; # Diretório raiz do servidor
+        index index.html; # Arquivo padrão de índice
+    }
+}
+```
+
+- Verificar se há erros de sintaxe e recarregar o servidor:
+
+```
+sudo nginx -t
+sudo nginx -s reload
+```
+
+- Testar as páginas HTML tanto em HTTP quanto em HTTPS usando o certificado SSL gerado:
+
+```
+http://localhost/
+```
+
+<img src="/images/seguranca.png"> <br>
+
+```
+https://localhost/
+```
+
+<img src="/images/com_seguranca.png"> <br>
+
+```
+http://localhost/servico1/
+```
+
+<img src="/images/seguranca1.png"> <br>
+
+```
+https://localhost/servico1/
+```
+
+<img src="/images/com_seguranca1.png"> <br>
+
+```
+http://localhost/servico2/
+```
+
+<img src="/images/seguranca2.png"> <br>
+
+```
+https://localhost/servico2/
+```
+
+<img src="/images/com_seguranca2.png"> <br>
