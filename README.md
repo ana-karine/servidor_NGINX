@@ -355,3 +355,119 @@ https://localhost/servico2/
 ```
 
 <img src="/images/seguranca2.png"> <br>
+
+#### Otimização de Desempenho
+
+**Objetivo:** implementar cache HTTP e compressão Gzip.
+
+#### Passos:
+
+**a. Configurar mais um Servidor Web Básico:**
+
+- Criar o arquivo de configuração `performance.conf` para o novo servidor:
+
+```
+sudo nano /etc/nginx/sites-enabled/performance.conf
+```
+
+- Criar o conteúdo do arquivo `performance.conf`:
+
+```
+server {
+    listen 8003;
+    root /var/www/performance;
+    index index.html;
+}
+```
+
+- Adicionar o conteúdo HTML desejado no arquivo `index.html`:
+
+```
+cd /var/www/
+sudo mkdir performance
+cd performance/
+sudo nano index.html
+```
+
+- Verificar se há erros de sintaxe e recarregar o servidor:
+
+```
+sudo nginx -t
+sudo nginx -s reload
+```
+
+- Testar a página:
+
+```
+http://localhost:8003/
+```
+
+<img src="/images/performance.png"> <br>
+
+**a. Configurações de Cache:**
+
+- Entrar no arquivo de configuração `performance.conf`:
+
+```
+sudo nano /etc/nginx/sites-enabled/performance.conf
+```
+
+- Especificar como os arquivos `.jpg` devem ser tratados em relação ao cache:
+
+```
+server {
+    listen 8003;
+    root /var/www/performance;
+    index index.html;
+
+    location ~ \.jpg$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+```
+
+Benefícios: essa configuração melhora o desempenho do site, pois os navegadores e caches intermediários podem reutilizar os arquivos `.jpg` por 30 dias sem precisar fazer uma nova requisição ao servidor, reduzindo a carga no servidor e o tempo de carregamento das páginas para os usuários.
+
+- Análise da página (antes):
+
+<img src="/images/cache1.png"> <br>
+
+- Análise da página (depois):
+
+<img src="/images/cache2.png"> <br>
+
+**b. Configurações de Gzip:**
+
+- Entrar no arquivo de configuração `performance.conf`:
+
+```
+sudo nano /etc/nginx/sites-enabled/performance.conf
+```
+
+- Ativar a compressão gzip para arquivos CSS:
+
+```
+server {
+    listen 8003;
+    root /var/www/performance;
+    index index.html;
+    gzip on;
+    gzip_types text/css;
+
+    location ~ \.jpg$ {
+        expires 30d;
+        add_header Cache-Control public;
+    }
+}
+```
+
+Benefícios: a compressão gzip para arquivos CSS oferece benefícios cruciais para websites, pois reduz significativamente o tamanho dos arquivos, acelera o carregamento das páginas, economiza largura de banda e melhora a classificação nos motores de busca devido à maior velocidade de carregamento.
+
+- Análise da página (antes):
+
+<img src="/images/gzip1.png"> <br>
+
+- Análise da página (depois):
+
+<img src="/images/gzip2.png"> <br>
