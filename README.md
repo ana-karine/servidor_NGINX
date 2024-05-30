@@ -138,5 +138,6 @@ sudo nginx -s reload
 
 ```
 http://localhost:8080/
+``````
 
 <img src="/images/proxy.png"> <br>
